@@ -1,0 +1,13 @@
+/.git
+.gitignore
+.gitlab-ci.yml
+
+Dockerfile
+.dockerignore
+docker-compose.*yml
+
+README.md
+
+.env
+/pgdata
+/chdata

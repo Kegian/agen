@@ -1,0 +1,9 @@
+BEGIN;
+
+CREATE TABLE "users"
+(
+    "id"   UUID PRIMARY KEY NOT NULL,
+    "name" VARCHAR(40) NOT NULL
+);
+
+COMMIT;

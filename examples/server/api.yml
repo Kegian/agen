@@ -1,0 +1,38 @@
+# Format description: github.com/Kegian/agen
+
+settings:
+  url: /api/v1
+  title: Game platform schema
+  security:
+    - {}
+    - bearer: []
+
+api:
+  _common:
+    response:
+      default: $Error
+
+  user: # Everything about users
+    'GET /users/{user_id}': # Return user info
+      request:
+        params:
+          user_id: uuid # User ID (23fb25b8-1780-4bcb-bf28-1a91bb706a54)
+      response:
+        body:
+          data: $User
+
+schemas:
+  AnyValue: # Can be anything
+
+  Error:
+    code: int64
+    message: string
+    debug: string?
+
+  Empty:
+    data: object
+
+  User:
+    id: uuid # (23fb25b8-1780-4bcb-bf28-1a91bb706a54)
+    name: string
+

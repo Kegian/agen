@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    # image: registry.example.com/api:${IMAGE_TAG:-dev}
+    depends_on:
+      - postgres
+      # - clickhouse
+    environment:
+      PG_HOST: ${PG_HOST:-postgres}
+      PG_PORT: ${PG_PORT:-5432}
+      PG_USER: ${PG_USER:-postgres}
+      PG_PASS: ${PG_PASS:-postgres}
+      PG_NAME: ${PG_NAME:-postgres}
+
+  postgres:
+    image: postgres:15.3-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_PASS:-postgres}
+    volumes: 
+      - pgdata:/var/lib/postgresql/data
+
+  # clickhouse:
+  #   image: clickhouse/clickhouse-server
+  #   restart: always
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     CLICKHOUSE_USER: default
+  #     CLICKHOUSE_PASSWORD: default
+  #     CLICKHOUSE_DB: clickhouse
+  #   volumes:
+  #     - chdata:/var/lib/clickhouse
+
+volumes:
+  pgdata:
+  # chdata:

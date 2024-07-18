@@ -1,0 +1,86 @@
+openapi: 3.0.2
+info:
+  title: Game platform schema
+  version: 1.0.0
+servers:
+- url: /api/v1
+security:
+- {}
+- bearerAuth: []
+tags:
+- description: Everything about users
+  name: user
+paths:
+  /users/{user_id}:
+    get:
+      description: Return user info
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          description: User ID
+          example: 23fb25b8-1780-4bcb-bf28-1a91bb706a54
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+                required:
+                - data
+                type: object
+          description: Successful operation
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default response
+      tags:
+      - user
+components:
+  schemas:
+    AnyValue:
+      description: Can be anything
+    Empty:
+      properties:
+        data:
+          type: object
+      required:
+      - data
+      type: object
+    Error:
+      properties:
+        code:
+          format: int64
+          type: integer
+        debug:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    User:
+      properties:
+        id:
+          example: 23fb25b8-1780-4bcb-bf28-1a91bb706a54
+          format: uuid
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http

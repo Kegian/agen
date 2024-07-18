@@ -1,0 +1,150 @@
+/* grid.layoutit.com?id=BJAPX6v */
+.container {  display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "main side";
+}
+
+.main {  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 2.2fr 0.2fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "head"
+    "code"
+    "logs";
+    grid-area: main;
+}
+
+.logs {
+    grid-area: logs;
+    box-shadow: inset -7px 10px 9px -7px rgba(0,0,0,0.4);
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #c49090;
+    font-weight: bold;
+}
+
+.code { grid-area: code; }
+
+.head {
+    display: grid;
+    grid-template-columns: 1.7fr 0.9fr 0.4fr 0.7fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "title path save generate";
+    grid-area: head;
+    align-items: center;
+
+    background: rgb(148,47,47);
+    background: linear-gradient(180deg, rgba(148,47,47,1) 0%, rgba(54,17,17,1) 78%);
+    box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.7);
+}
+
+.generate { grid-area: generate; }
+
+.save { grid-area: save; }
+
+.path { grid-area: path; }
+
+.title {
+    display: grid;
+    grid-area: title;
+    color: white;
+    padding-left: 15px;
+    align-items: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.side {  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.1fr 1.9fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "tabs"
+    "preview";
+    grid-area: side;
+}
+
+.tabs {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "swagger openapi youtrack";
+    grid-area: tabs;
+    background-color: #222;
+}
+
+.swagger { grid-area: swagger; }
+
+.openapi { grid-area: openapi; }
+
+.youtrack { grid-area: youtrack; }
+
+.swagger, .openapi, .youtrack {
+    display: grid;
+    margin-top: 3px;
+    cursor: pointer;
+    background-color: #666;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: #fff;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    user-select: none;
+    box-shadow: inset -7px 10px 9px -7px rgba(0,0,0,0.4);
+}
+
+.generate, .save{
+    display: grid;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #000;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    height: 75%;
+    user-select: none;
+
+    /* border:1px solid #CCC; */
+    background: rgb(68,126,66);
+    background: linear-gradient(0deg, rgba(68,126,66,1) 13%, rgba(104,224,96,1) 100%);
+    box-shadow: 0 0 10px -1px rgba(0,0,0,0.6);
+}
+
+.path {
+    text-align: right;
+    color: #bbb;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+
+.preview { grid-area: preview; }
+
+html, body , .container {
+    height: 100%;
+    margin: 0;
+    background-color: #afafaf;
+}
+
+#editor {
+    width:100%;
+    height:100%;
+}
+
