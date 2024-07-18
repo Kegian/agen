@@ -44,6 +44,7 @@ var InitCmd = &cobra.Command{
 			return err
 		}
 
+		fmt.Println()
 		fmt.Println("Project successfully initialized!")
 		fmt.Println("  make deps -- install required dependencies")
 		fmt.Println("  make gen  -- generate api/sql go files")
