@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: Game platform schema
+  title: User service
   version: 1.0.0
 servers:
 - url: /api/v1

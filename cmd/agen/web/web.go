@@ -217,9 +217,11 @@ func randomString(length int) string {
 }
 
 var templateFile = `# Example of api.yml
+# Format description: github.com/Kegian/agen
+
 settings:
   url: /api/v1
-  title: Game platform schema
+  title: User service
   version: 1.0.0
   security:
     - {}

@@ -2,7 +2,7 @@
 
 settings:
   url: /api/v1
-  title: Game platform schema
+  title: User service
   security:
     - {}
     - bearer: []

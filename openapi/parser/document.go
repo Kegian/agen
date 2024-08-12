@@ -92,9 +92,9 @@ func GetType(val string) (Type, error) {
 		return TypeInt32, nil
 	case TypeInt64:
 		return TypeInt64, nil
-	case TypeFloat:
+	case TypeFloat, "float32":
 		return TypeFloat, nil
-	case TypeDouble:
+	case TypeDouble, "float64":
 		return TypeDouble, nil
 	case TypeString:
 		return TypeString, nil
