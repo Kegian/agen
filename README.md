@@ -58,6 +58,7 @@ API file have 3 main sections:
 
 <details> 
   <summary>Example</summary>
+  
   ```yml
   settings:
     title: User service
@@ -147,6 +148,7 @@ schemas:
 
 <details> 
   <summary>Type inheritance</summary>
+  
   ```yml
   TypeA:
     a: int32
@@ -159,6 +161,7 @@ schemas:
     c: string
     d: bool
    ```
+
  Result CommonType equivalent to:
    ```yml
   CommonType:
@@ -207,7 +210,8 @@ schemas:
 #### Example
 
 An example of api.yml file:
-```
+
+```yml
 settings:
   title: User service
   version: 1.0.0
@@ -270,6 +274,7 @@ schemas:
 
 <details> 
 <summary>Сorresponding generated OpenAPI YML file</summary>
+  
 ```yml
 openapi: 3.0.2
 info:
