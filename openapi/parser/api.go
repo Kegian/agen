@@ -2,6 +2,7 @@ package parser
 
 import (
 	"fmt"
+	"net/textproto"
 	"regexp"
 	"strconv"
 	"strings"
@@ -255,7 +256,7 @@ func ParseQuery(p *NodePair) ([]Schema, error) {
 	return query.Fields, nil
 }
 
-var forbiddenHeaders = map[string]struct{}{"accept": {}, "authorization": {}, "content-type": {}}
+var forbiddenHeaders = map[string]struct{}{"Accept": {}, "Authorization": {}, "Content-Type": {}}
 
 func ParseHeaders(p *NodePair) ([]Schema, error) {
 	headers, err := ParseSchema(p)
@@ -266,7 +267,7 @@ func ParseHeaders(p *NodePair) ([]Schema, error) {
 		return nil, Err(p.Right, "incorrect headers format")
 	}
 	for i, f := range headers.Fields {
-		headers.Fields[i].Name = strings.ToLower(f.Name)
+		headers.Fields[i].Name = textproto.CanonicalMIMEHeaderKey(f.Name)
 	}
 	for _, f := range headers.Fields {
 		if _, ok := forbiddenHeaders[f.Name]; ok {
