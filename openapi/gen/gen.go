@@ -119,6 +119,10 @@ func GenOperationRequest(op *oa.Operation, m parser.Method) {
 	for _, p := range m.Request.Query {
 		op.Parameters = append(op.Parameters, GenQuery(p))
 	}
+	// Add header params
+	for _, p := range m.Request.Headers {
+		op.Parameters = append(op.Parameters, GenHeader(p))
+	}
 
 	// Add body
 	if m.Request.Body != nil {
@@ -161,6 +165,18 @@ func GenQuery(p parser.Schema) oa.ParameterOrRef {
 		Parameter: &oa.Parameter{
 			Name:        p.Name,
 			In:          oa.ParameterInQuery,
+			Required:    nilBool(!p.Optional),
+			Schema:      GenSchemaOrRef(p),
+			Description: nilStr(p.Description),
+		},
+	}
+}
+
+func GenHeader(p parser.Schema) oa.ParameterOrRef {
+	return oa.ParameterOrRef{
+		Parameter: &oa.Parameter{
+			Name:        p.Name,
+			In:          oa.ParameterInHeader,
 			Required:    nilBool(!p.Optional),
 			Schema:      GenSchemaOrRef(p),
 			Description: nilStr(p.Description),

@@ -188,7 +188,10 @@ func ParseRequest(n *yaml.Node) (Request, error) {
 				return Request{}, err
 			}
 		case "headers":
-			return Request{}, Err(p.Left, "unimplemented")
+			req.Headers, err = ParseHeaders(&p)
+			if err != nil {
+				return Request{}, err
+			}
 		case "form":
 			return Request{}, Err(p.Left, "unimplemented")
 		case "body":
@@ -252,6 +255,27 @@ func ParseQuery(p *NodePair) ([]Schema, error) {
 	return query.Fields, nil
 }
 
+var forbiddenHeaders = map[string]struct{}{"accept": {}, "authorization": {}, "content-type": {}}
+
+func ParseHeaders(p *NodePair) ([]Schema, error) {
+	headers, err := ParseSchema(p)
+	if err != nil {
+		return nil, err
+	}
+	if headers.Type != TypeObject {
+		return nil, Err(p.Right, "incorrect headers format")
+	}
+	for i, f := range headers.Fields {
+		headers.Fields[i].Name = strings.ToLower(f.Name)
+	}
+	for _, f := range headers.Fields {
+		if _, ok := forbiddenHeaders[f.Name]; ok {
+			return nil, Err(p.Right, "forbidden header "+f.Name)
+		}
+	}
+	return headers.Fields, nil
+}
+
 func ParseBody(p *NodePair) (*Schema, error) {
 	body, err := ParseSchema(p)
 	if err != nil {
@@ -264,6 +288,7 @@ func MergeRequest(prior, minor Request) Request {
 	var res Request
 	res.Params = MergeParams(prior.Params, minor.Params)
 	res.Query = MergeParams(prior.Query, minor.Query)
+	res.Headers = MergeParams(prior.Headers, minor.Headers)
 	res.Body = prior.Body // TODO: merge bodies?
 	return res
 }

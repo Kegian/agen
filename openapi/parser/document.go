@@ -41,9 +41,10 @@ type Method struct {
 }
 
 type Request struct {
-	Params []Schema
-	Query  []Schema
-	Body   *Schema
+	Params  []Schema
+	Query   []Schema
+	Headers []Schema
+	Body    *Schema
 }
 
 type Response struct {
