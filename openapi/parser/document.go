@@ -56,6 +56,7 @@ type Response struct {
 type Schema struct {
 	Name        string
 	Type        Type
+	Format      string
 	IsArray     bool
 	Optional    bool
 	Description string

@@ -8,6 +8,7 @@ import (
 
 type ScalarType struct {
 	Type        Type
+	Format      string
 	Optional    bool
 	IsArray     bool
 	Description string
@@ -29,6 +30,13 @@ func ParseScalarType(n *yaml.Node) (ScalarType, error) {
 	if strings.HasSuffix(val, "[]") {
 		res.IsArray = true
 		val = val[:len(val)-2]
+	}
+	if lp := strings.Index(val, "("); lp >= 0 {
+		rp := strings.LastIndex(val, ")")
+		if rp > lp {
+			res.Format = val[lp+1 : rp]
+			val = val[:lp]
+		}
 	}
 	if strings.HasPrefix(val, "$") {
 		res.Type = Type(val)

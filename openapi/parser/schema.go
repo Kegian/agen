@@ -56,6 +56,7 @@ func ParseSchema(p *NodePair) (Schema, error) {
 			schema.Example = scalar.Example
 		}
 		schema.Type = scalar.Type
+		schema.Format = scalar.Format
 		schema.Optional = scalar.Optional
 		schema.IsArray = scalar.IsArray
 

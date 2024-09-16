@@ -142,7 +142,10 @@ func GenOperationRequest(op *oa.Operation, m parser.Method) {
 func GenContentType(s *parser.Schema) string {
 	switch s.Type {
 	case parser.TypeFile:
-		return "application/octet-stream"
+		if s.Format == "" {
+			return "application/octet-stream"
+		}
+		return s.Format
 	default:
 		return "application/json"
 	}
